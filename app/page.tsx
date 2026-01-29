@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: "lambface - Electronic Music Producer & DJ. Check here for mylatest releases, mixes, and upcoming shows.",
   openGraph: {
     title: "lambface",
-    description: "lambfac - Electronic Music Producer & DJ. Check here for my latest releases, mixes, and upcoming shows.",
+    description: "lambface - Electronic Music Producer & DJ. Check here for my latest releases, mixes, and upcoming shows.",
     url: "https://lambface.nuwrrrld.com",
     type: "website",
     videos: [
