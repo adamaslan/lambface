@@ -1,0 +1,13 @@
+/* styles/glows.css */
+
+.glow-cyan {
+  --glow-color: #00ffff;
+}
+
+.glow-magenta {
+  --glow-color: #ff00ff;
+}
+
+.glow-green {
+  --glow-color: #00ff88;
+}
