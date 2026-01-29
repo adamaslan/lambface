@@ -1,4 +1,4 @@
-import Head from "next/head";
+import type { Metadata } from "next";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CanvasPanel from "./components/CanvasPanel";
@@ -9,6 +9,25 @@ import MixcloudScreen from "./components/screens/MixcloudScreen";
 import LeftBuildings from "./components/buildings/LeftBuildings";
 import RightBuildings from "./components/buildings/RightBuildings";
 
+export const metadata: Metadata = {
+  title: "lambface",
+  description: "lambface - Electronic Music Producer & DJ. Check here for mylatest releases, mixes, and upcoming shows.",
+  openGraph: {
+    title: "lambface",
+    description: "lambfac - Electronic Music Producer & DJ. Check here for my latest releases, mixes, and upcoming shows.",
+    url: "https://lambface.nuwrrrld.com",
+    type: "website",
+    videos: [
+      {
+        url: "https://lambface.nuwrrrld.com/lamb2.mp4",
+        type: "video/mp4",
+        width: 1280,
+        height: 720,
+      },
+    ],
+  },
+};
+
 /**
  * The main page component.
  *
@@ -18,29 +37,20 @@ import RightBuildings from "./components/buildings/RightBuildings";
  */
 export default function Page() {
   return (
-    <>
-      <Head>
-        <meta property="og:video" content="https://lambface.nuwrrrld.com/lamb2.mp4" />
-        <meta property="og:video:type" content="video/mp4" />
-        <meta property="og:video:width" content="1280" />
-        <meta property="og:video:height" content="720" />
-      </Head>
+    <main className="min-h-screen relative bg-[#05050a]">
+      <Header />
 
-      <main className="min-h-screen relative bg-[#05050a]">
-        <Header />
+      <LeftBuildings />
+      <RightBuildings />
 
-        <LeftBuildings />
-        <RightBuildings />
+      <CanvasPanel>
+        <IdentityScreen />
+        <SoundCloudScreen />
+        <MixcloudScreen />
+        <ShowsScreen />
+      </CanvasPanel>
 
-        <CanvasPanel>
-          <IdentityScreen />
-          <SoundCloudScreen />
-          <MixcloudScreen />
-          <ShowsScreen />
-        </CanvasPanel>
-
-        <Footer />
-      </main>
-    </>
+      <Footer />
+    </main>
   );
 }
