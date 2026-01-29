@@ -17,9 +17,9 @@ export default function NeonGlyph({ glyphUrl, className }: NeonGlyphProps) {
   useEffect(() => {
     const controller = new AbortController();
 
-    // Security check: Ensure we are fetching a local asset to prevent XSS via external SVG injection
-    if (!glyphUrl.startsWith("/") || glyphUrl.includes("://")) {
-      setError("Security Error: Only local assets are allowed.");
+    // Updated security check
+    if (!glyphUrl.startsWith("/glyphs/") || !glyphUrl.endsWith(".svg") || glyphUrl.includes("..")) {
+      setError("Security Error: Only local SVG assets from the /glyphs/ directory are allowed.");
       return;
     }
 
@@ -48,7 +48,7 @@ export default function NeonGlyph({ glyphUrl, className }: NeonGlyphProps) {
   }
 
   if (!svgContent) {
-    return <div className="w-16 h-16 bg-gray-800 animate-pulse" aria-hidden />; // Placeholder while loading
+    return <div className="w-16 h-16 bg-gray-800 animate-pulse" aria-hidden />;
   }
 
   return (
