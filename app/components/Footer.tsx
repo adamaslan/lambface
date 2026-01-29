@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="w-8 h-8 opacity-80">
         <Lottie animationData={neonPulse} loop autoplay />
       </div>
-      <div className="text-cyan-200">lambface © 2026</div>
+      <div className="text-cyan-200">lambface 2026</div>
     </motion.footer>
   );
 }
