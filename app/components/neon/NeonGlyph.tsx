@@ -17,6 +17,12 @@ export default function NeonGlyph({ glyphUrl, className }: NeonGlyphProps) {
   useEffect(() => {
     const controller = new AbortController();
 
+    // Security check: Ensure we are fetching a local asset to prevent XSS via external SVG injection
+    if (!glyphUrl.startsWith("/") || glyphUrl.includes("://")) {
+      setError("Security Error: Only local assets are allowed.");
+      return;
+    }
+
     const fetchSvg = async () => {
       try {
         const response = await fetch(glyphUrl, { signal: controller.signal });
