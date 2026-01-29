@@ -101,18 +101,7 @@ function outlineToClasses(outline: "cyan" | "magenta") {
     return outline === "magenta" ? "border-magenta-400/60" : "border-cyan-400/60";
 }
 
-function BuildingRow({ buildings, offsetY }: { buildings: readonly BuildingSpec[], offsetY: number }) {
-    const [scrollY, setScrollY] = useState(0);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrollY(window.scrollY);
-        };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
+function BuildingRow({ buildings, offsetY, scrollY }: { buildings: readonly BuildingSpec[], offsetY: number, scrollY: number }) {
     const getParallaxOffset = (layer: number) => {
         const speedMultiplier = layer === 1 ? 0.1 : layer === 2 ? 0.3 : 0.5;
         return scrollY * speedMultiplier;
@@ -153,12 +142,24 @@ function BuildingRow({ buildings, offsetY }: { buildings: readonly BuildingSpec[
 }
 
 export default function RightBuildings(): JSX.Element {
+    const [scrollY, setScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollY(window.scrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll(); // Initial check
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
         <>
-            <BuildingRow buildings={ROW_1} offsetY={0} />
-            <BuildingRow buildings={ROW_2} offsetY={200} />
-            <BuildingRow buildings={ROW_3} offsetY={400} />
-            <BuildingRow buildings={ROW_4} offsetY={600} />
+            <BuildingRow buildings={ROW_1} offsetY={0} scrollY={scrollY} />
+            <BuildingRow buildings={ROW_2} offsetY={200} scrollY={scrollY} />
+            <BuildingRow buildings={ROW_3} offsetY={400} scrollY={scrollY} />
+            <BuildingRow buildings={ROW_4} offsetY={600} scrollY={scrollY} />
         </>
     );
 }
